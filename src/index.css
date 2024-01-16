@@ -29,15 +29,12 @@ html {
 *,
 *::before,
 *::after {
-    position: relative;
+  position: relative;
   box-sizing: inherit;
 }
 
 body {
   position: relative;
-  overflow-x: hidden;
-  min-width: 320px;
-  min-height: 100vh;
   font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -48,8 +45,18 @@ body {
   line-height: 1.2;
   color: #1c1c1c;
   background-color: #fff;
-  /* display: flex;
-  flex-direction: column; */
+}
+
+#root {
+  overflow-x: hidden;
+  min-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
 }
 
 img,
@@ -90,8 +97,6 @@ fieldset {
   position: fixed;
   transform: scale(0);
 }
-
-
 
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
