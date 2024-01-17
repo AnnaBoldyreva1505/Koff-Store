@@ -4,27 +4,37 @@ import { Catalog } from "../../components/Catalog/Catalog";
 import s from "./Main.module.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAccessCategory } from "../../store/category/category.slice";
+import { fetchCategories } from "../../store/category/category.slice";
+import { fetchProducts } from "../../store/products/products.slice";
 
 export const Main = () => {
   const dispatch = useDispatch();
   const {
-    data: dataCategory,
-    loading: loadingCategory,
-    error: errorCategory,
-  } = useSelector((state) => state.category);
+    data: dataCategories,
+    loading: loadingCategories,
+    error: errorCategories,
+  } = useSelector((state) => state.categories);
+
+  const { data: dataGoods } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(fetchAccessCategory());
+    const fetchData = async () => {
+      await Promise.all([
+        dispatch(fetchCategories()),
+        dispatch(fetchProducts()),
+      ]);
+    };
+
+    fetchData();
   }, [dispatch]);
 
-  if (loadingCategory) return <div>Загрузка ...</div>;
-  if (errorCategory) return <div>Ошибка: ${errorCategory}</div>;
+  if (loadingCategories) return <div>Загрузка ...</div>;
+  if (errorCategories) return <div>Ошибка: ${errorCategories}</div>;
 
   return (
     <main className={s.main}>
-      <Catalog data={dataCategory} />
-      <Goods />
+      <Catalog data={dataCategories} />
+      <Goods data={dataGoods} />
     </main>
   );
 };

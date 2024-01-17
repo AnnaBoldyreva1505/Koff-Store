@@ -8,7 +8,7 @@ export const fetchAccessToken = createAsyncThunk(
     );
 
     if (!response.ok) {
-      throw new Error("Не удалось получить токен доступа");
+      throw new Error("Не удалось получить токен доступа!");
     }
 
     const data = await response.json();
@@ -24,12 +24,12 @@ const authSlice = createSlice({
     error: null,
   },
   reducers: {
-    removeToken(state) {
+    removeToken: (state) => {
       state.accessToken = null;
       localStorage.removeItem("accessToken");
     },
   },
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchAccessToken.pending, (state) => {
         state.loading = true;
