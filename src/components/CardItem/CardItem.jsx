@@ -1,21 +1,23 @@
+import { Link } from "react-router-dom";
 import s from "./CardItem.module.scss";
 import { FaRegHeart } from "react-icons/fa";
+import { API_URL } from "../../const";
 
 export const CardItem = ({ data }) => (
   <li>
     <article className={s.card}>
-      <a href={`/product/${data.id}`} className={`${s.link} ${s.linkImg}`}>
+      <Link to={`/product/${data.id}`} className={`${s.link} ${s.linkImg}`}>
         <img
-          src={`https://koff-api.vercel.app/${data.images[0]}`}
+          src={`${API_URL}${data.images[0]}`}
           alt={data.name}
           className={s.img}></img>
-      </a>
+      </Link>
 
       <div className={s.info}>
         <h3 className={s.title}>
-          <a href="/product/567" className={s.link}>
+          <Link to="/product/${data.id}" className={s.link}>
             {data.name}
-          </a>
+          </Link>
         </h3>
 
         <p className={s.price}>{data.price}₽</p>
